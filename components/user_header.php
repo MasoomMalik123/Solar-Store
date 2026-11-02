@@ -34,6 +34,7 @@
       }
       $is_logged_in = isset($user_id) && $user_id !== '' && is_array($fetch_profile);
       $catalog_by_brand = [];
+      $catalog_types = [];
       if(isset($conn)){
          try{
             $catalog_rows = $conn->query("SELECT DISTINCT brand, category FROM `products` WHERE brand <> '' AND category <> '' ORDER BY brand, category")->fetchAll(PDO::FETCH_ASSOC);
@@ -52,14 +53,25 @@
          $verified_brand = trim((string)($catalog_item['company'] ?? ''));
          $verified_category = trim((string)($catalog_item['category'] ?? ''));
          if($verified_brand !== '' && $verified_category !== '') $catalog_by_brand[$verified_brand][] = $verified_category;
+         if($verified_brand !== '' && $verified_category !== ''){
+            $verified_type = trim((string)($catalog_item['subtype'] ?? $catalog_item['type'] ?? ''));
+            if($verified_type !== '') $catalog_types[$verified_brand][$verified_category][] = $verified_type;
+         }
       }
       foreach($verified_accessories as $accessory_item){
          $accessory_category = trim((string)($accessory_item['category'] ?? ''));
          if($accessory_category !== '') $catalog_by_brand['Solar Store'][] = $accessory_category;
+         if($accessory_category !== '') $catalog_types['Solar Store'][$accessory_category][] = 'accessory';
       }
       foreach($catalog_by_brand as $catalog_brand => $catalog_categories){
          $catalog_by_brand[$catalog_brand] = array_values(array_unique($catalog_categories));
          sort($catalog_by_brand[$catalog_brand]);
+      }
+      foreach($catalog_types as $type_brand => $type_categories){
+         foreach($type_categories as $type_category => $types){
+            $catalog_types[$type_brand][$type_category] = array_values(array_unique($types));
+            sort($catalog_types[$type_brand][$type_category]);
+         }
       }
    ?>
 
@@ -118,12 +130,10 @@
             <div class="nav-primary">
                <a href="home.php" class="nav-item <?php if($current_page=='home.php') echo 'active'; ?>">Home</a>
                <a href="shop.php" class="nav-item <?php if($current_page=='shop.php') echo 'active'; ?>">Shop</a>
-               <a href="brands.php" class="nav-item <?php if($current_page=='brands.php') echo 'active'; ?>">Brands</a>
-               <a href="hv-systems.php" class="nav-item <?php if($current_page=='hv-systems.php') echo 'active'; ?>">HV Systems</a>
                <div class="nav-category">
                   <button id="category-menu-btn" class="nav-item nav-category-trigger" type="button" aria-controls="category-menu" aria-expanded="false"><span>Category</span><i class="fas fa-chevron-down category-chevron" aria-hidden="true"></i></button>
                   <div id="category-menu" class="category-mega" hidden>
-                     <div class="category-mega-intro"><span>SHOP BY BRAND</span><h3>Find your system.</h3><p>Select a brand first, then choose the equipment you need.</p></div>
+                     <div class="category-mega-intro"><span>SHOP BY BRAND / TYPE</span><h3>Find your system.</h3><p>Select a brand, category and product type. HV batteries and systems are included in the normal catalog.</p></div>
                      <form action="category.php" method="get" class="category-filter-form">
                         <label for="category-brand-select">Brand</label>
                         <select id="category-brand-select" name="brand">
@@ -132,9 +142,17 @@
                               <option value="<?= htmlspecialchars($brand_name, ENT_QUOTES, 'UTF-8'); ?>"><?= htmlspecialchars($brand_name, ENT_QUOTES, 'UTF-8'); ?></option>
                            <?php endforeach; ?>
                         </select>
-                        <label for="category-type-select">Equipment</label>
+                        <label for="category-type-select">Category</label>
                         <select id="category-type-select" name="category">
-                           <option value="">Choose equipment</option>
+                           <option value="">All categories</option>
+                           <?php foreach(array_values(array_unique(array_merge(...array_values($catalog_by_brand ?: [[]])))) as $category_name): ?>
+                              <option value="<?= htmlspecialchars($category_name, ENT_QUOTES, 'UTF-8'); ?>"><?= htmlspecialchars($category_name, ENT_QUOTES, 'UTF-8'); ?></option>
+                           <?php endforeach; ?>
+                        </select>
+                        <label for="category-subtype-select">Product type</label>
+                        <select id="category-subtype-select" name="type">
+                           <option value="">All types</option>
+                           <?php foreach(['hybrid','on-grid','off-grid','high-voltage','bifacial','monofacial','accessory'] as $type_name): ?><option value="<?= $type_name; ?>"><?= ucwords(str_replace('-', ' ', $type_name)); ?></option><?php endforeach; ?>
                         </select>
                         <button type="submit" class="category-submit"><span>View products</span><i class="fas fa-arrow-right" aria-hidden="true"></i></button>
                         <?php if(empty($catalog_by_brand)): ?>
@@ -193,5 +211,7 @@
    </section>
 
 </header>
+
+<script>window.solarCatalogTypes = <?= json_encode($catalog_types, JSON_HEX_TAG|JSON_HEX_APOS|JSON_HEX_QUOT|JSON_HEX_AMP); ?>;</script>
 
 <!-- modal removed: contact requests moved to contact_us.php -->

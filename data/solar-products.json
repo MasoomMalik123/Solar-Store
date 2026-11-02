@@ -268,5 +268,72 @@
     "details": "Residential Vertex S module range; the official datasheet lists 425–450 W and up to 22.5% module efficiency for the referenced NEG9R.28 family.",
     "image_url": "https://www-cdn.trinasolar.com/wwwstorage/sites/17/Vertex-S.jpg",
     "official_url": "https://pages.trinasolar.com/rs/567-KJK-096/images/NEG9R.28_EN_2023_POWER_450W.pdf"
+  },
+  {
+    "company": "ZIEWNIC",
+    "type": "inverter",
+    "subtype": "hybrid",
+    "category": "Inverters",
+    "name": "ZIEWNIC 6G PV3000",
+    "model": "Diamond II 6G PV3000",
+    "details": "Pakistan-market pure sine-wave hybrid inverter with battery operation, lithium compatibility and a 55–450 VDC PV input range as described on the official product page. Confirm the exact datasheet and warranty before purchase.",
+    "image_url": "https://www.ziewnic.com/panel/files/primary/Diamond%20ii%20_%20PV3000%20Front_46z0fuvj.png",
+    "official_url": "https://www.ziewnic.com/product.php?url=6G%20%28PV3000%29"
+  },
+  {
+    "company": "ZIEWNIC",
+    "type": "inverter",
+    "subtype": "hybrid",
+    "category": "Inverters",
+    "name": "ZIEWNIC 6G PV6500",
+    "model": "ON/OFF/MKS/KS 6G PV6500",
+    "details": "Official ZIEWNIC product listing for a 6G hybrid inverter family. Product image and specifications are linked to the manufacturer source; confirm the selected PV and battery configuration with the distributor.",
+    "image_url": "https://www.ziewnic.com/panel/files/primary/Ziewnic_Product_ImagesArtboard%2026_eed4unoe.png",
+    "official_url": "https://www.ziewnic.com/product.php?url=ON%2FOFF%2FMKS%2FKS+Solar+Hybrid+Inverter+6G+PV6500"
+  },
+  {
+    "company": "ZIEWNIC",
+    "type": "inverter",
+    "subtype": "hybrid",
+    "category": "Inverters",
+    "name": "ZIEWNIC PV8500",
+    "model": "ON GRID WITH ENERGY STORAGE HYBRID 6G EUROPEAN PV8500",
+    "details": "Grid-connected hybrid inverter with energy-storage positioning in the official ZIEWNIC catalog. Confirm phase, battery voltage, export-control requirements and local warranty before ordering.",
+    "image_url": "https://www.ziewnic.com/panel/files/primary/Ziewnic_Product_ImagesArtboard%2027_kt5yufx9.png",
+    "official_url": "https://www.ziewnic.com/product.php?url=ON%2FOFF%2FMKS%2FKS+Solar+Hybrid+Inverter+6.5+%28KVA%29+6G+PV8500"
+  },
+  {
+    "company": "Luminey",
+    "type": "inverter",
+    "subtype": "on-grid",
+    "category": "Inverters",
+    "name": "Luminey G2 Pro",
+    "model": "G2 Pro 10/15/20 kW",
+    "details": "Three-phase on-grid inverter range listed by Luminey in 10, 15 and 20 kW variants. The official product page describes PV oversizing, bifacial-module suitability and app monitoring; confirm the exact SKU datasheet.",
+    "image_url": "https://cdn.prod.website-files.com/665433302e89292677e3797f/6899dfebad89283a52862c34_Frame%201707481812.webp",
+    "official_url": "https://www.luminey.com/products"
+  },
+  {
+    "company": "Luminey",
+    "type": "inverter",
+    "subtype": "hybrid",
+    "category": "Inverters",
+    "name": "Luminey Elecra PV8000",
+    "model": "Elecra PV8000",
+    "details": "Hybrid inverter listed by Luminey with up to 8,000 W PV input and a 48 V battery architecture. Confirm output rating, battery communication and installation limits from the current datasheet.",
+    "image_url": "https://cdn.prod.website-files.com/665433302e89292677e3797f/6a7c76a34633b94c1d8281c8_Frame%202147240371.jpg.webp",
+    "official_url": "https://www.luminey.com/products"
+  },
+  {
+    "company": "Luminey",
+    "type": "battery",
+    "subtype": "high-voltage",
+    "category": "Batteries",
+    "name": "Luminey SunESS H",
+    "model": "SunESS H 5/10/15/20 kWh",
+    "capacity_kwh": 5,
+    "details": "High-voltage LFP storage family listed by Luminey in 5, 10, 15 and 20 kWh configurations, intended for grid-tied and off-grid applications. Confirm stack size and inverter compatibility before purchase.",
+    "image_url": "https://cdn.prod.website-files.com/665433302e89292677e3797f/68ef9235a12258ab88ce9c13_Group%201171278088.webp",
+    "official_url": "https://www.luminey.com/products"
   }
 ]

@@ -14,6 +14,7 @@ include 'components/wishlist_cart.php';
 
 $brand = trim($_GET['brand'] ?? '');
 $category_input = trim($_GET['category'] ?? '');
+$type_filter = strtolower(trim($_GET['type'] ?? ''));
 $category_aliases = [
    'panels' => 'Panels',
    'panel' => 'Panels',
@@ -52,6 +53,7 @@ $verified_items = [];
 foreach($verified_catalog as $item){
    if($brand !== '' && strcasecmp((string)($item['company'] ?? ''), $brand) !== 0) continue;
    if($category !== '' && strcasecmp((string)($item['category'] ?? ''), $category) !== 0) continue;
+   if($type_filter !== '' && strcasecmp((string)($item['subtype'] ?? $item['type'] ?? ''), $type_filter) !== 0) continue;
    $verified_items[] = $item;
 }
 $brand_priority = ['Knox','ZIEWNIC','Inverex','Luminey','Primax','itel Energy','T-Solar / Tesla Industries','SolarMax','Solis','GoodWe','Growatt','Huawei','Sungrow','SMA','Fronius','BYD'];
@@ -60,7 +62,7 @@ if($brand === '' || strcasecmp($brand, 'Solar Store') === 0){
    foreach($verified_accessories as $item){
       $accessory_category = (string)($item['category'] ?? '');
       $matches_category = $category === '' || (strcasecmp($category, 'Breakers') === 0 && in_array($accessory_category, ['Protection','DB Boxes'], true)) || strcasecmp($accessory_category, $category) === 0;
-      if($matches_category) $verified_items[] = array_merge($item, ['company'=>'Solar Store','type'=>'accessory','category'=>$accessory_category,'model'=>$item['name'] ?? '']);
+      if($matches_category && ($type_filter === '' || $type_filter === 'accessory')) $verified_items[] = array_merge($item, ['company'=>'Solar Store','type'=>'accessory','category'=>$accessory_category,'model'=>$item['name'] ?? '']);
    }
 }
 

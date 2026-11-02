@@ -25,17 +25,32 @@ if(categoryMenuBtn && categoryMenu){
 if(categoryFilterForm){
    const brandSelect = categoryFilterForm.querySelector('#category-brand-select');
    const typeSelect = categoryFilterForm.querySelector('#category-type-select');
+   const subtypeSelect = categoryFilterForm.querySelector('#category-subtype-select');
 
    if(brandSelect && typeSelect){
-      brandSelect.addEventListener('change', ()=>{
-         typeSelect.replaceChildren(new Option('All equipment', ''));
-         const categories = ['Panels', 'Inverters', 'Batteries', 'Breakers', 'Mounting', 'Protection', 'DB Boxes', 'Cables', 'Accessories', 'Monitoring'];
-         categories.forEach(category => typeSelect.add(new Option(category, category)));
+      const allCategories = ['Panels', 'Inverters', 'Batteries', 'Breakers', 'Mounting', 'Protection', 'DB Boxes', 'Cables', 'Accessories', 'Monitoring'];
+      const allTypes = ['hybrid', 'on-grid', 'off-grid', 'high-voltage', 'bifacial', 'monofacial', 'accessory'];
+      const typeMap = window.solarCatalogTypes || {};
+      const refreshTypes = () => {
+         if(!subtypeSelect) return;
+         const brand = brandSelect.value;
+         const category = typeSelect.value;
+         const values = brand && typeMap[brand] ? (category && typeMap[brand][category] ? typeMap[brand][category] : Object.values(typeMap[brand]).flat()) : allTypes;
+         subtypeSelect.replaceChildren(new Option('All types', ''));
+         [...new Set(values)].sort().forEach(type => subtypeSelect.add(new Option(type.replaceAll('-', ' '), type)));
+         subtypeSelect.disabled = false;
+      };
+      const refreshCategories = () => {
+         const brand = brandSelect.value;
+         const values = brand && typeMap[brand] ? Object.keys(typeMap[brand]) : allCategories;
+         typeSelect.replaceChildren(new Option('All categories', ''));
+         [...new Set(values)].sort().forEach(category => typeSelect.add(new Option(category, category)));
          typeSelect.disabled = false;
-      });
-      typeSelect.replaceChildren(new Option('All equipment', ''));
-      ['Panels', 'Inverters', 'Batteries', 'Breakers', 'Mounting', 'Protection', 'DB Boxes', 'Cables', 'Accessories', 'Monitoring'].forEach(category => typeSelect.add(new Option(category, category)));
-      typeSelect.disabled = false;
+         refreshTypes();
+      };
+      brandSelect.addEventListener('change', refreshCategories);
+      typeSelect.addEventListener('change', refreshTypes);
+      refreshCategories();
    }
 }
 

@@ -14,6 +14,7 @@ include 'components/wishlist_cart.php';
 
 $brand_filter = trim($_GET['brand'] ?? '');
 $category_filter = trim($_GET['category'] ?? '');
+$type_filter = strtolower(trim($_GET['type'] ?? ''));
 $category_aliases = ['panel'=>'Panels','panels'=>'Panels','inverter'=>'Inverters','inverters'=>'Inverters','battery'=>'Batteries','batteries'=>'Batteries','breaker'=>'Breakers','breakers'=>'Breakers','mounting'=>'Mounting'];
 $category_filter = $category_aliases[strtolower($category_filter)] ?? $category_filter;
 $verified_catalog_file = __DIR__ . '/data/solar-products.json';
@@ -24,18 +25,24 @@ $verified_items = [];
 foreach($verified_catalog as $item){
    if($brand_filter !== '' && strcasecmp((string)($item['company'] ?? ''), $brand_filter) !== 0) continue;
    if($category_filter !== '' && strcasecmp((string)($item['category'] ?? ''), $category_filter) !== 0) continue;
+   if($type_filter !== '' && strcasecmp((string)($item['subtype'] ?? $item['type'] ?? ''), $type_filter) !== 0) continue;
    $verified_items[] = $item;
 }
 if($brand_filter === '' || strcasecmp($brand_filter, 'Solar Store') === 0){
    foreach($verified_accessories as $item){
       $accessory_category = (string)($item['category'] ?? '');
       $matches_category = $category_filter === '' || strcasecmp($category_filter, 'Breakers') === 0 && in_array($accessory_category, ['Protection','DB Boxes'], true) || strcasecmp($accessory_category, $category_filter) === 0;
-      if($matches_category) $verified_items[] = array_merge($item, ['company'=>'Solar Store','type'=>'accessory','category'=>$accessory_category,'model'=>$item['name'] ?? '']);
+      if($matches_category && ($type_filter === '' || $type_filter === 'accessory')) $verified_items[] = array_merge($item, ['company'=>'Solar Store','type'=>'accessory','category'=>$accessory_category,'model'=>$item['name'] ?? '']);
    }
 }
 $brand_priority = ['Knox','ZIEWNIC','Inverex','Luminey','Primax','itel Energy','T-Solar / Tesla Industries','SolarMax','Solis','GoodWe','Growatt','Huawei','Sungrow','SMA','Fronius','BYD'];
 usort($verified_items, function($a,$b) use ($brand_priority){ $ai=array_search($a['company']??'', $brand_priority, true); $bi=array_search($b['company']??'', $brand_priority, true); $ai=$ai===false?999:$ai; $bi=$bi===false?999:$bi; return $ai===$bi ? strcasecmp((string)($a['name']??''),(string)($b['name']??'')) : $ai<=>$bi; });
-$show_catalog = $brand_filter !== '' || $category_filter !== '';
+$show_catalog = true;
+$db_filters = ['brand <> ?'];
+$db_values = [''];
+if($brand_filter !== ''){ $db_filters[] = 'brand = ?'; $db_values[] = $brand_filter; }
+if($category_filter !== ''){ $db_filters[] = 'category = ?'; $db_values[] = $category_filter; }
+$db_sql = 'SELECT * FROM `products` WHERE ' . implode(' AND ', $db_filters) . ' ORDER BY category, name';
 
 ?>
 
@@ -60,17 +67,17 @@ $show_catalog = $brand_filter !== '' || $category_filter !== '';
 
    <div class="section-heading category-results-heading">
       <div>
-         <p class="section-kicker"><?= $show_catalog ? htmlspecialchars(($brand_filter !== '' ? $brand_filter . ' / ' : '') . ($category_filter !== '' ? $category_filter : 'ALL EQUIPMENT'), ENT_QUOTES, 'UTF-8') : 'STORE CATALOG'; ?></p>
-         <h1 class="heading"><?= $show_catalog ? 'Products and models' : 'latest solar products'; ?></h1>
+         <p class="section-kicker"><?= htmlspecialchars(($brand_filter !== '' ? $brand_filter . ' / ' : '') . ($category_filter !== '' ? $category_filter : 'ALL EQUIPMENT') . ($type_filter !== '' ? ' / ' . $type_filter : ''), ENT_QUOTES, 'UTF-8'); ?></p>
+         <h1 class="heading">Products and models</h1>
       </div>
-      <?php if($show_catalog): ?><a href="shop.php" class="section-link">Clear filters <i class="fas fa-rotate-left" aria-hidden="true"></i></a><?php endif; ?>
+      <?php if($brand_filter !== '' || $category_filter !== '' || $type_filter !== ''): ?><a href="shop.php" class="section-link">Clear filters <i class="fas fa-rotate-left" aria-hidden="true"></i></a><?php endif; ?>
    </div>
 
    <div class="box-container">
 
    <?php
-   $select_products = $conn->prepare("SELECT * FROM `products` WHERE brand <> '' ORDER BY category, name");
-     $select_products->execute();
+   $select_products = $conn->prepare($db_sql);
+     $select_products->execute($db_values);
      if($select_products->rowCount() > 0){
       while($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)){
    ?>
