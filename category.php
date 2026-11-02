@@ -118,7 +118,8 @@ if($brand === '' || strcasecmp($brand, 'Solar Store') === 0){
    <?php
       }
    }elseif(empty($verified_items)){
-      echo '<p class="empty">no products found!</p>';
+      $requested_label = trim((string)($brand !== '' ? $brand : ($category !== '' ? $category : 'this selection')));
+      echo '<div class="empty"><h2>No verified models imported for '.htmlspecialchars($requested_label, ENT_QUOTES, 'UTF-8').' yet</h2><p>This brand is listed in our directory, but we do not show guessed or random products. Open the full catalog or ask Solar Assistant for a compatible alternative.</p><a class="btn" href="shop.php">View full catalog</a> <a class="option-btn" href="assistant.php?q='.rawurlencode($requested_label.' products and compatible alternatives').'">Ask Solar Assistant</a></div>';
    }
    ?>
 
