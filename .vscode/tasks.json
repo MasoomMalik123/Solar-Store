@@ -1,0 +1,57 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Solar Store: Start PHP Server",
+      "type": "process",
+      "command": "C:\\xampp\\php\\php.exe",
+      "args": [
+        "-S",
+        "127.0.0.1:8012",
+        "-t",
+        "${workspaceFolder}"
+      ],
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "solar-store-php-server",
+        "pattern": [
+          {
+            "regexp": ".*",
+            "message": 0
+          }
+        ],
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Development Server \\(http://127\\.0\\.0\\.1:8012\\) started",
+          "endsPattern": "Development Server \\(http://127\\.0\\.0\\.1:8012\\) started"
+        }
+      }
+    },
+    {
+      "label": "Solar Store: Open Home in Browser",
+      "type": "process",
+      "command": "powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-Command",
+        "Start-Process 'http://127.0.0.1:8012/'"
+      ],
+      "dependsOn": "Solar Store: Start PHP Server",
+      "dependsOrder": "sequence",
+      "problemMatcher": []
+    },
+    {
+      "label": "Solar Store: Open Calculator in Browser",
+      "type": "process",
+      "command": "powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-Command",
+        "Start-Process 'http://127.0.0.1:8012/calculator.php'"
+      ],
+      "dependsOn": "Solar Store: Start PHP Server",
+      "dependsOrder": "sequence",
+      "problemMatcher": []
+    }
+  ]
+}

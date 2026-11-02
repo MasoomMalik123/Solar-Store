@@ -1,0 +1,6 @@
+{
+  "phpserver.phpPath": "C:\\xampp\\php\\php.exe",
+  "phpserver.port": 8012,
+  "phpserver.relativePath": ".",
+  "phpserver.autoOpenOnReload": true
+}

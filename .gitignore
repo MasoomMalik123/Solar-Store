@@ -1,0 +1,6 @@
+.env
+*.log
+vendor/
+uploads/
+*.zip
+*.sql.gz
