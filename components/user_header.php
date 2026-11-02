@@ -47,8 +47,10 @@
       // the same brand/category selector as database shop products.
       $verified_catalog_file = __DIR__ . '/../data/solar-products.json';
       $verified_accessories_file = __DIR__ . '/../data/solar-accessories.json';
+      $brand_directory_file = __DIR__ . '/../data/solar-brands.json';
       $verified_catalog = is_file($verified_catalog_file) ? (json_decode(file_get_contents($verified_catalog_file), true) ?: []) : [];
       $verified_accessories = is_file($verified_accessories_file) ? (json_decode(file_get_contents($verified_accessories_file), true) ?: []) : [];
+      $brand_directory = is_file($brand_directory_file) ? (json_decode(file_get_contents($brand_directory_file), true) ?: []) : [];
       foreach($verified_catalog as $catalog_item){
          $verified_brand = trim((string)($catalog_item['company'] ?? ''));
          $verified_category = trim((string)($catalog_item['category'] ?? ''));
@@ -62,6 +64,17 @@
          $accessory_category = trim((string)($accessory_item['category'] ?? ''));
          if($accessory_category !== '') $catalog_by_brand['Solar Store'][] = $accessory_category;
          if($accessory_category !== '') $catalog_types['Solar Store'][$accessory_category][] = 'accessory';
+      }
+      // Keep every researched brand discoverable even when its model catalogue
+      // is still awaiting a verified product image/specification import.
+      foreach($brand_directory as $directory_brand){
+         $directory_name = trim((string)($directory_brand['name'] ?? ''));
+         if($directory_name === '') continue;
+         if(!isset($catalog_by_brand[$directory_name])) $catalog_by_brand[$directory_name] = [];
+         foreach(($directory_brand['categories'] ?? []) as $directory_category){
+            $directory_category = trim((string)$directory_category);
+            if($directory_category !== '') $catalog_by_brand[$directory_name][] = $directory_category;
+         }
       }
       foreach($catalog_by_brand as $catalog_brand => $catalog_categories){
          $catalog_by_brand[$catalog_brand] = array_values(array_unique($catalog_categories));

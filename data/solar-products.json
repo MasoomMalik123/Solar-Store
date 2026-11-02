@@ -335,5 +335,128 @@
     "details": "High-voltage LFP storage family listed by Luminey in 5, 10, 15 and 20 kWh configurations, intended for grid-tied and off-grid applications. Confirm stack size and inverter compatibility before purchase.",
     "image_url": "https://cdn.prod.website-files.com/665433302e89292677e3797f/68ef9235a12258ab88ce9c13_Group%201171278088.webp",
     "official_url": "https://www.luminey.com/products"
+  },
+  {
+    "company":"CoreTECH","type":"inverter","subtype":"hybrid","category":"Inverters","name":"CoreTECH NewGen PV9000 6KW","model":"NewGen PV9000","output_kw":6,"details":"CoreTECH NewGen hybrid inverter listed for Pakistan. It combines PV, battery and grid operation; verify the exact phase, MPPT window, battery voltage, BMS protocol and warranty for the selected SKU.","image_url":"https://coretechsolar.pk/wp-content/uploads/2026/09/NewGEN-6kW.jpg","official_url":"https://coretechsolar.pk/product/coretech-newgen-pv9000-6kw-hybrid-inverter/"
+  },
+  {
+    "company":"CoreTECH","type":"inverter","subtype":"hybrid","category":"Inverters","name":"CoreTECH NewGen PV24000 12.2KW","model":"NewGen PV24000","output_kw":12.2,"details":"CoreTECH NewGen high-power hybrid inverter listing. Confirm three-phase configuration, maximum PV input, battery voltage and local installation requirements before ordering.","image_url":"https://coretechsolar.pk/wp-content/uploads/2026/06/NewGEN-12.2kW.jpg","official_url":"https://coretechsolar.pk/product/coretech-newgen-pv24000-12-2kw-hybrid-inverter/"
+  },
+  {
+    "company":"CoreTECH","type":"inverter","subtype":"off-grid","category":"Inverters","name":"CoreTECH MaxGen PV12000 6.5KW","model":"MaxGen PV12000","output_kw":6.5,"details":"CoreTECH PV solar inverter with 12,000 W maximum PV input listing. Confirm battery requirement, charging current, AC output and phase from the current datasheet.","image_url":"https://coretechsolar.pk/wp-content/uploads/2026/06/MaxGEN.jpg","official_url":"https://coretechsolar.pk/product/coretech-maxgen-pv12000-6-5kw-pv-solar-inverter/"
+  },
+  {
+    "company":"CoreTECH","type":"inverter","subtype":"off-grid","category":"Inverters","name":"CoreTECH NewGen PV6000 4.2KW","model":"NewGen PV6000","output_kw":4.2,"details":"CoreTECH off-grid/hybrid family listing for residential backup. Confirm the exact operating mode, PV voltage range and battery compatibility before purchase.","image_url":"https://coretechsolar.pk/wp-content/uploads/2026/05/NewGEN-4kW.jpg.jpeg","official_url":"https://coretechsolar.pk/product/coretech-newgen-pv6000-4-2kw-hybrid-inverter/"
+  },
+  {
+    "company":"CoreTECH","type":"inverter","subtype":"hybrid","category":"Inverters","name":"CoreTECH NexGen PV12000 6KW","model":"NexGen PV12000","output_kw":6,"details":"CoreTECH NexGen IP66 hybrid inverter family. The manufacturer describes dual-output load management, monitoring and lithium BMS support; confirm the final regional SKU and warranty.","image_url":"https://coretechsolar.pk/wp-content/uploads/2026/04/NexGEN-6kW.jpg","official_url":"https://coretechsolar.pk/product/coretech-nexgen-pv12000-6kw-hybrid-inverter/"
+  },
+  {
+    "company":"CoreTECH","type":"inverter","subtype":"hybrid","category":"Inverters","name":"CoreTECH NexGen PV16000 8KW","model":"NexGen PV16000","output_kw":8,"details":"CoreTECH NexGen IP66 hybrid inverter for residential and light commercial systems. Confirm PV oversizing, MPPT current, battery voltage and export-control settings.","image_url":"https://coretechsolar.pk/wp-content/uploads/2026/03/CoreTECH-NexGen-PV16000-8KW-Hybrid-Inverter.jpg","official_url":"https://coretechsolar.pk/product/coretech-nexgen-pv16000-8kw-hybrid-inverter/"
+  },
+  {
+    "company":"CoreTECH","type":"inverter","subtype":"hybrid","category":"Inverters","name":"CoreTECH NexGen PV20000 10KW","model":"NexGen PV20000","output_kw":10,"details":"CoreTECH NexGen IP66 hybrid inverter listing. Confirm phase, maximum PV array, battery communication and net-metering/export configuration for the selected installation.","image_url":"https://coretechsolar.pk/wp-content/uploads/2026/03/CoreTECH-NexGen-PV20000-10KW-Hybrid-Inverter.jpg","official_url":"https://coretechsolar.pk/product/coretech-nexgen-pv20000-10kw-hybrid-inverter/"
+  },
+  {
+    "company":"CoreTECH","type":"inverter","subtype":"off-grid","category":"Inverters","name":"CoreTECH ProGen PV2200 1.6KW","model":"ProGen PV2200","output_kw":1.6,"details":"CoreTECH compact off-grid inverter for smaller backup systems. Confirm battery voltage, solar charger rating and surge capability from the exact datasheet.","image_url":"https://coretechsolar.pk/wp-content/uploads/2026/03/CoreTECH-ProGen-PV2200-1.6KW-Off-Grid-Inverter.png","official_url":"https://coretechsolar.pk/product/coretech-progen-pv2200-1-6kw-off-grid-inverter/"
+  },
+  {
+    "company":"CoreTECH","type":"inverter","subtype":"hybrid","category":"Inverters","name":"CoreTECH PV8000 6.2KW","model":"PV8000","output_kw":6.2,"details":"CoreTECH hybrid inverter listing for battery-backed solar systems. Confirm PV input, AC output, battery voltage and protection ratings before purchase.","image_url":"https://coretechsolar.pk/wp-content/uploads/2025/06/CoreTECH-PV8000-6.2KW-Hybrid-inverter.jpg","official_url":"https://coretechsolar.pk/product/coretech-pv8000-6-2kw-hybrid-inverter/"
+  },
+  {
+    "company":"CoreTECH","type":"inverter","subtype":"hybrid","category":"Inverters","name":"CoreTECH PV5600 4KW","model":"PV5600","output_kw":4,"details":"CoreTECH hybrid inverter listing. Confirm the selected battery chemistry, PV voltage range, MPPT count and local warranty before installation.","image_url":"https://coretechsolar.pk/wp-content/uploads/2025/06/CoreTECH-PV5600-4KW-Hybrid-inverter.jpg","official_url":"https://coretechsolar.pk/product/coretech-pv5600-4kw-hybrid-inverter/"
+  },
+  {
+    "company":"CoreTECH","type":"battery","subtype":"low-voltage","category":"Batteries","name":"CoreTECH CT5120 Pro","model":"CT5120 Pro 51.2V 100Ah","capacity_kwh":5.12,"voltage":"51.2 V","details":"CoreTECH LiFePO4 lithium battery listing for low-voltage solar storage. Confirm usable energy, continuous current, BMS communication, parallel limit and approved inverter list.","image_url":"https://coretechsolar.pk/wp-content/uploads/2025/06/CoreTECH-CT5120-Pro-5.12kWh-Lithium-ion-Battery.jpg","official_url":"https://coretechsolar.pk/product/coretech-ct5120-pro-5-12kwh-lithium-ion-battery/"
+  },
+  {
+    "company":"CoreTECH","type":"battery","subtype":"low-voltage","category":"Batteries","name":"CoreTECH X Luxwatt","model":"X Luxwatt 5.12kWh 51.2V","capacity_kwh":5.12,"voltage":"51.2 V","details":"CoreTECH X Luxwatt lithium-ion battery listing. Confirm chemistry, usable capacity, charge/discharge current and inverter communication before ordering.","image_url":"https://coretechsolar.pk/wp-content/uploads/2025/06/CoreTECH-X-Luxwatt-5.12kWh-Lithium-ion-Battery.jpg","official_url":"https://coretechsolar.pk/product/coretech-x-luxwatt-5-12kwh-lithium-ion-battery/"
+  },
+  {
+    "company":"CoreTECH","type":"battery","subtype":"low-voltage","category":"Batteries","name":"CoreTECH CT2560 Pro+","model":"CT2560 Pro+ 2.56kWh","capacity_kwh":2.56,"voltage":"25.6 V","details":"CoreTECH compact LiFePO4 battery listing. Confirm the required series/parallel arrangement, BMS protocol and compatible inverter models.","image_url":"https://coretechsolar.pk/wp-content/uploads/2025/06/CoreTECH-CT2560-Pro-2.56kWh-Lithium-ion-Battery.jpg","official_url":"https://coretechsolar.pk/product/coretech-ct2560-pro-2-5kwh-lithium-ion-battery/"
+  },
+  {
+    "company":"CoreTECH","type":"battery","subtype":"low-voltage","category":"Batteries","name":"CoreTECH X Sunwoda","model":"X Sunwoda 5.12kWh 51.2V","capacity_kwh":5.12,"voltage":"51.2 V","details":"CoreTECH X Sunwoda lithium-ion battery listing. Confirm usable energy, BMS communication, current rating and inverter compatibility for the selected batch.","image_url":"https://coretechsolar.pk/wp-content/uploads/2025/06/CoreTECH-X-Sunwoda-5.12kWh-Lithium-ion-Battery.jpg","official_url":"https://coretechsolar.pk/product/coretech-x-sunwoda-5-12kwh-lithium-ion-battery/"
+  },
+  {
+    "company":"CoreTECH","type":"panel","subtype":"bifacial","category":"Panels","name":"CoreTECH Bifacial 585W","model":"CoreTECH Bifacial 585W","panel_w":585,"details":"CoreTECH bifacial solar panel listing. Confirm cell technology, dimensions, Voc/Isc, temperature coefficient and warranty from the current module datasheet.","image_url":"https://coretechsolar.pk/wp-content/uploads/2025/06/CoreTECH-Bificial-585W-.jpg","official_url":"https://coretechsolar.pk/product/coretech-bificial-585w/"
+  },
+  {
+    "company":"Dyness","type":"battery","subtype":"low-voltage","category":"Batteries","name":"Dyness DL5.0F","model":"DL5.0F 5.12kWh 51.2V 100Ah IP20","capacity_kwh":5.12,"voltage":"51.2 V","details":"Dyness LiFePO4 battery listed through CoreTECH Pakistan. Confirm usable energy, 1C current rating, mounting options, BMS communication and inverter compatibility.","image_url":"https://coretechsolar.pk/wp-content/uploads/2026/10/Dyness-DL5.0F-300x300.jpg","official_url":"https://coretechsolar.pk/product/dyness-dl5-0f-5-12kwh-51-2v-100ah-ip20-lithium-ion-battery/"
+  },
+  {
+    "company":"Dyness","type":"battery","subtype":"low-voltage","category":"Batteries","name":"Dyness PowerHaus","model":"PowerHaus 5.12kWh 51.2V 100Ah IP66","capacity_kwh":5.12,"voltage":"51.2 V","details":"Dyness IP66 low-voltage LiFePO4 battery listing. Confirm usable energy, current, communication protocol and installation clearances.","image_url":"https://coretechsolar.pk/wp-content/uploads/2026/09/Dyness-PowerHaus-Battery-300x300.jpg","official_url":"https://coretechsolar.pk/product/dyness-powerhaus-5-12kwh-51-2v-100ah-ip66-lithium-ion-battery/"
+  },
+  {
+    "company":"Dyness","type":"battery","subtype":"low-voltage","category":"Batteries","name":"Dyness PowerBrick SC","model":"PowerBrick SC 16.07kWh 51.2V 314Ah IP20","capacity_kwh":16.07,"voltage":"51.2 V","details":"Dyness high-capacity LiFePO4 battery with floor-standing format. Confirm usable energy, output current, BMS integration and parallel configuration.","image_url":"https://coretechsolar.pk/wp-content/uploads/2026/09/PowerBrick-SC-300x300.jpg","official_url":"https://coretechsolar.pk/product/dyness-powerbrick-sc-16-08kwh-51-2v-314ah-ip20-lithium-ion-battery/"
+  },
+  {
+    "company":"Dyness","type":"battery","subtype":"low-voltage","category":"Batteries","name":"Dyness DL5.0C Pro","model":"DL5.0C Pro 5.12kWh 51.2V 100Ah IP20","capacity_kwh":5.12,"voltage":"51.2 V","details":"Dyness modular low-voltage LiFePO4 battery listing. Confirm usable capacity, charge/discharge current and approved inverter communication.","image_url":"https://coretechsolar.pk/wp-content/uploads/2026/07/DL5.0C-Pro-1-300x300.jpg","official_url":"https://coretechsolar.pk/product/dyness-dl5-0c-pro-5-12kwh-51-2v-100ah-ip20-lithium-ion-battery/"
+  },
+  {
+    "company":"Dyness","type":"battery","subtype":"low-voltage","category":"Batteries","name":"Dyness Powerbox Pro","model":"Powerbox Pro 10.24kWh 51.2V 200Ah IP65","capacity_kwh":10.24,"voltage":"51.2 V","details":"Dyness IP65 low-voltage LiFePO4 storage unit. Confirm usable energy, installation orientation, BMS protocol and inverter compatibility.","image_url":"https://coretechsolar.pk/wp-content/uploads/2026/07/PowerBox-Pro-1-300x300.jpg","official_url":"https://coretechsolar.pk/product/dyness-powerbox-pro-10-24kwh-51-2v-200ah-ip65-lithium-ion-battery/"
+  },
+  {
+    "company":"Dyness","type":"battery","subtype":"low-voltage","category":"Batteries","name":"Dyness PowerDepot G2","model":"PowerDepot G2 5.12kWh 51.2V 100Ah IP66","capacity_kwh":5.12,"voltage":"51.2 V","details":"Dyness IP66 low-voltage LiFePO4 battery listing. Confirm usable energy, current limit, communication and outdoor installation requirements.","image_url":"https://coretechsolar.pk/wp-content/uploads/2026/06/PowerDepot-G2-1-300x300.jpg","official_url":"https://coretechsolar.pk/product/dyness-powerdepot-g2-5-12kwh-51-2v-100ah-ip66-lithium-ion-battery/"
+  },
+  {
+    "company":"Dyness","type":"battery","subtype":"high-voltage","category":"Batteries","name":"Dyness Stack280","model":"Stack280 IP20","details":"Dyness modular high-voltage storage family. Confirm module count, usable energy, system voltage, BMS and compatible inverter list for the selected stack.","image_url":"https://coretechsolar.pk/wp-content/uploads/2026/06/Dyness-Stack280-1-300x300.jpg","official_url":"https://coretechsolar.pk/product/dyness-stack280-ip20-lithium-ion-battery/"
+  },
+  {
+    "company":"Dyness","type":"battery","subtype":"high-voltage","category":"Batteries","name":"Dyness PowerBrick Plus","model":"PowerBrick Plus 16.07kWh 51.2V 314Ah IP65","capacity_kwh":16.07,"voltage":"51.2 V","details":"Dyness high-capacity IP65 LiFePO4 battery listing. Confirm usable energy, current, mounting and supported inverter communication.","image_url":"https://coretechsolar.pk/wp-content/uploads/2026/06/PowerBrick-Plus-2-300x300.jpg","official_url":"https://coretechsolar.pk/product/dyness-powerbrick-plus-16-07kwh-51-2v-314ah-ip65-lithium-ion-battery/"
+  },
+  {
+    "company":"Dyness","type":"battery","subtype":"low-voltage","category":"Batteries","name":"Dyness PowerBrick Max","model":"PowerBrick Max 16.07kWh 51.2V 314Ah IP20","capacity_kwh":16.07,"voltage":"51.2 V","details":"Dyness high-capacity IP20 LiFePO4 battery listing. Confirm usable energy, current, BMS communication and installation environment.","image_url":"https://coretechsolar.pk/wp-content/uploads/2026/07/PowerBrick-Max-300x300.jpg","official_url":"https://coretechsolar.pk/product/dyness-powerbrick-max-16-07kwh-51-2v-314ah-ip20-lithium-ion-battery/"
+  },
+  {
+    "company":"Dyness","type":"battery","subtype":"low-voltage","category":"Batteries","name":"Dyness Stack100","model":"Stack100 5.12kWh 51.2V 100Ah IP20","capacity_kwh":5.12,"voltage":"51.2 V","details":"Dyness modular battery listing. Confirm the required stack size, usable energy, operating current and inverter compatibility.","image_url":"https://coretechsolar.pk/wp-content/uploads/2026/04/Dyness-Stack-100-300x300.jpg","official_url":"https://coretechsolar.pk/product/dyness-stack100-ip20-lithium-ion-battery/"
+  },
+  {
+    "company":"Dyness","type":"battery","subtype":"low-voltage","category":"Batteries","name":"Dyness DL2.5 LFP","model":"DL2.5 25.6V 100Ah 2.56kWh IP20","capacity_kwh":2.56,"voltage":"25.6 V","details":"Dyness LFP lead-acid replacement battery listing. Confirm series/parallel arrangement, usable energy, current rating and communication requirements.","image_url":"https://coretechsolar.pk/wp-content/uploads/2026/04/Dyness-DL2-300x300.jpg","official_url":"https://coretechsolar.pk/product/dyness-dl2-5-lfp-25-6v-100ah-2-56kwh-ip20-lead-acid-replacement-battery/"
+  },
+  {
+    "company":"Dyness","type":"battery","subtype":"low-voltage","category":"Batteries","name":"Dyness AR1.2 LFP","model":"AR1.2 12.8V 100Ah 1.28kWh","capacity_kwh":1.28,"voltage":"12.8 V","details":"Dyness compact LFP lead-acid replacement battery listing. Confirm series/parallel arrangement, charge profile and inverter/UPS compatibility.","image_url":"https://coretechsolar.pk/wp-content/uploads/2026/04/LifePO4-Dyness-Battery-1-300x300.jpg","official_url":"https://coretechsolar.pk/product/dyness-ar1-2-lfp-12-8v/"
+  },
+  {
+    "company":"Tesla Solar","type":"panel","subtype":"bifacial","category":"Panels","name":"Trina 620W Bifacial Solar Panel","model":"Trina 620W","panel_w":620,"details":"Trina bifacial module listed by Tesla Industries Pakistan. Confirm exact Trina model, cell technology, Voc/Isc, dimensions and warranty from the module datasheet.","image_url":"https://tesla-pv.com/cdn/shop/files/ti-solar-trina-620w-bifacial.webp?v=1792332138&width=1200","official_url":"https://tesla-pv.com/products/trina-620w-bifacial-solar-panel"
+  },
+  {
+    "company":"Tesla Solar","type":"inverter","subtype":"hybrid","category":"Inverters","name":"HSC AiP Single-Phase Hybrid Inverter","model":"HSC AiP 6kW","output_kw":6,"details":"Tesla Industries Pakistan single-phase hybrid inverter listing. Confirm battery voltage, PV input, backup output and current PKR price for the selected SKU.","image_url":"https://tesla-pv.com/cdn/shop/files/ti-solar-hsc-aip-6kw.webp?v=1792338391&width=1200","official_url":"https://tesla-pv.com/products/hsc-aip-single-phase-hybrid-inverter"
+  },
+  {
+    "company":"Tesla Solar","type":"inverter","subtype":"hybrid","category":"Inverters","name":"VM III Prime Hybrid Inverter","model":"VM III Prime","details":"Tesla Industries listing for a VM III Prime hybrid inverter. Confirm output power, battery voltage, PV voltage/current and communication options from the exact datasheet.","image_url":"https://tesla-pv.com/cdn/shop/files/ti-solar-vm-iii-prime.webp?v=1792332138&width=900","official_url":"https://tesla-pv.com/products/vm-iii-prime-hybrid-inverter"
+  },
+  {
+    "company":"Tesla Solar","type":"inverter","subtype":"hybrid","category":"Inverters","name":"Infini Solar V III Hybrid Inverter","model":"Infini Solar V III","details":"Tesla Industries hybrid inverter listing for solar, battery and grid operation. Confirm exact rated output, PV window, battery requirements and warranty.","image_url":"https://tesla-pv.com/cdn/shop/files/ti-solar-infini-solar-v-iii.webp?v=1792332127&width=900","official_url":"https://tesla-pv.com/products/infini-solar-v-iii-hybrid-inverter"
+  },
+  {
+    "company":"Tesla Solar","type":"inverter","subtype":"hybrid","category":"Inverters","name":"Infinity HLE Hybrid Inverter","model":"Infinity HLE","details":"Tesla Industries hybrid inverter family. Confirm output rating, phase, PV input, battery voltage, backup capability and local warranty for the selected model.","image_url":"https://tesla-pv.com/cdn/shop/files/ti-solar-infinity-hle.webp?v=1792332127&width=900","official_url":"https://tesla-pv.com/products/infinity-hle-hybrid-inverter"
+  },
+  {
+    "company":"Tesla Solar","type":"inverter","subtype":"hybrid","category":"Inverters","name":"Infinity HLE 18kW Hybrid Inverter","model":"Infinity HLE 18kW","output_kw":18,"details":"Tesla Industries high-power hybrid inverter listing. Confirm three-phase details, battery architecture, PV input and installation requirements before purchase.","image_url":"https://tesla-pv.com/cdn/shop/files/ti-solar-infinity-hle-18kw.webp?v=1792332127&width=900","official_url":"https://tesla-pv.com/products/infinity-hle-18kw-hybrid-inverter"
+  },
+  {
+    "company":"Tesla Solar","type":"inverter","subtype":"hybrid","category":"Inverters","name":"HSC AiP Three-Phase Hybrid Inverter","model":"HSC AiP Three-Phase","details":"Tesla Industries three-phase hybrid inverter listing. Confirm exact output range, phase balance, battery voltage, MPPT inputs and local approvals.","image_url":"https://tesla-pv.com/cdn/shop/files/ti-solar-hsc-aip-three-phase.webp?v=1792332169&width=900","official_url":"https://tesla-pv.com/products/hsc-aip-three-phase-hybrid-inverter"
+  },
+  {
+    "company":"Tesla Solar","type":"inverter","subtype":"hybrid","category":"Inverters","name":"WP IP65 Three-Phase Hybrid Inverter","model":"WP IP65 Three-Phase","details":"Tesla Industries IP65 three-phase hybrid inverter listing. Confirm output, battery voltage, MPPT limits and outdoor installation clearances.","image_url":"https://tesla-pv.com/cdn/shop/files/ti-solar-wp-ip65.webp?v=1792332138&width=900","official_url":"https://tesla-pv.com/products/wp-ip65-three-phase-hybrid-inverter"
+  },
+  {
+    "company":"Tesla Solar","type":"inverter","subtype":"on-grid","category":"Inverters","name":"Tesla TGT On-Grid Inverter","model":"TGT 6–15kW","output_kw":6,"output_max_kw":15,"details":"Tesla Industries TGT on-grid inverter range for grid-connected solar. Confirm the exact power class, MPPT count, grid approvals and net-metering requirements.","image_url":"https://tesla-pv.com/cdn/shop/files/ti-solar-tgt-on-grid-6-15kw.webp?v=1792332136&width=1200","official_url":"https://tesla-pv.com/products/tesla-tgt-on-grid-inverter"
+  },
+  {
+    "company":"Tesla Solar","type":"inverter","subtype":"on-grid","category":"Inverters","name":"Tesla TGT Commercial On-Grid Inverter","model":"TGT 50–60kW","output_kw":50,"output_max_kw":60,"details":"Tesla Industries commercial TGT on-grid inverter range. Confirm three-phase electrical limits, MPPT configuration, grid code and site protection design.","image_url":"https://tesla-pv.com/cdn/shop/files/ti-solar-tgt-on-grid-50-60kw.webp?v=1792338393&width=900","official_url":"https://tesla-pv.com/products/tesla-tgt-commercial-on-grid-inverter"
+  },
+  {
+    "company":"Tesla Solar","type":"battery","subtype":"low-voltage","category":"Batteries","name":"TLi RP 25.8V 100Ah Lithium Battery","model":"TLi RP 25.8V 100Ah","capacity_kwh":2.58,"voltage":"25.8 V","details":"Tesla Industries low-voltage lithium battery listing. Confirm usable energy, BMS, series/parallel limits and compatible inverter/UPS models.","image_url":"https://tesla-pv.com/cdn/shop/files/ti-solar-tli-rp-25v.webp?v=1792332138&width=900","official_url":"https://tesla-pv.com/products/tli-rp-25-8v-100ah-lithium-battery"
+  },
+  {
+    "company":"Tesla Solar","type":"battery","subtype":"low-voltage","category":"Batteries","name":"TLi GP 52V 100Ah Lithium Battery","model":"TLi GP 52V 100Ah","capacity_kwh":5.12,"voltage":"52 V","details":"Tesla Industries 52 V lithium battery listing. Confirm usable energy, BMS communication, charge/discharge current and inverter compatibility.","image_url":"https://tesla-pv.com/cdn/shop/files/ti-solar-tli-gp-52v.webp?v=1792332135&width=900","official_url":"https://tesla-pv.com/products/tli-gp-52v-100ah-lithium-battery"
+  },
+  {
+    "company":"Tesla Solar","type":"battery","subtype":"low-voltage","category":"Batteries","name":"TLi RP 52V Lithium Battery","model":"TLi RP 52V","details":"Tesla Industries low-voltage lithium storage listing. Confirm capacity variant, BMS protocol, current rating and approved inverter list.","image_url":"https://tesla-pv.com/cdn/shop/files/ti-solar-tli-rp-52v.webp?v=1792338393&width=900","official_url":"https://tesla-pv.com/products/tli-rp-52v-lithium-battery"
+  },
+  {
+    "company":"Tesla Solar","type":"battery","subtype":"high-voltage","category":"Batteries","name":"TLi HV High-Voltage Battery","model":"TLi HV Stack","details":"Tesla Industries high-voltage battery stack listing. Confirm stack capacity, operating voltage, BMS communication and compatible hybrid inverter before purchase.","image_url":"https://tesla-pv.com/cdn/shop/files/ti-solar-tli-hv-stack.webp?v=1792338390&width=900","official_url":"https://tesla-pv.com/products/tli-hv-high-voltage-battery"
   }
 ]
