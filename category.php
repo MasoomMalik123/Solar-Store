@@ -13,6 +13,8 @@ if(isset($_SESSION['user_id'])){
 include 'components/wishlist_cart.php';
 
 $brand = trim($_GET['brand'] ?? '');
+$brand_aliases = ['CoreTECH Solar'=>'CoreTECH','BYD Battery-Box'=>'BYD','T-Solar / Tesla Industries'=>'Tesla Solar','KNOX'=>'Knox'];
+$brand = $brand_aliases[$brand] ?? $brand;
 $category_input = trim($_GET['category'] ?? '');
 $type_filter = strtolower(trim($_GET['type'] ?? ''));
 $category_aliases = [
@@ -53,11 +55,23 @@ $verified_items = [];
 foreach($verified_catalog as $item){
    if($brand !== '' && strcasecmp((string)($item['company'] ?? ''), $brand) !== 0) continue;
    if($category !== '' && strcasecmp((string)($item['category'] ?? ''), $category) !== 0) continue;
-   if($type_filter !== '' && strcasecmp((string)($item['subtype'] ?? $item['type'] ?? ''), $type_filter) !== 0) continue;
+   $item_subtype = strtolower(trim((string)($item['subtype'] ?? $item['type'] ?? '')));
+   $item_system_class = strtolower(trim((string)($item['system_class'] ?? '')));
+   if($type_filter !== '' && $item_subtype !== $type_filter && $item_system_class !== $type_filter) continue;
    $verified_items[] = $item;
 }
-$brand_priority = ['Knox','ZIEWNIC','Inverex','Luminey','Primax','itel Energy','T-Solar / Tesla Industries','SolarMax','Solis','GoodWe','Growatt','Huawei','Sungrow','SMA','Fronius','BYD'];
-usort($verified_items, function($a,$b) use ($brand_priority){ $ai=array_search($a['company']??'', $brand_priority, true); $bi=array_search($b['company']??'', $brand_priority, true); $ai=$ai===false?999:$ai; $bi=$bi===false?999:$bi; return $ai===$bi ? strcasecmp((string)($a['name']??''),(string)($b['name']??'')) : $ai<=>$bi; });
+$category_group_order = ['hybrid'=>0,'high-voltage'=>1,'battery'=>2,'low-voltage'=>2,'on-grid'=>3,'off-grid'=>4,'bifacial'=>5,'monofacial'=>6,'protection'=>7,'db boxes'=>8,'cables'=>9,'panels'=>10,'mounting'=>11];
+usort($verified_items, function($a,$b) use ($category_group_order){
+   $group = static function($item){
+      $value = strtolower(trim((string)($item['subtype'] ?? $item['system_class'] ?? '')));
+      if($value === '' && (($item['category'] ?? '') === 'Batteries')) return 'battery';
+      if($value === '' && (($item['category'] ?? '') === 'Panels')) return 'panels';
+      return $value !== '' ? $value : strtolower(trim((string)($item['category'] ?? '')));
+   };
+   $ai = $category_group_order[$group($a)] ?? 99;
+   $bi = $category_group_order[$group($b)] ?? 99;
+   return $ai === $bi ? strcasecmp((string)($a['name'] ?? ''), (string)($b['name'] ?? '')) : $ai <=> $bi;
+});
 if($brand === '' || strcasecmp($brand, 'Solar Store') === 0){
    foreach($verified_accessories as $item){
       $accessory_category = (string)($item['category'] ?? '');
@@ -130,26 +144,29 @@ if($brand === '' || strcasecmp($brand, 'Solar Store') === 0){
       <div><p class="section-kicker">VERIFIED MANUFACTURER CATALOG</p><h2 class="heading">Brands, models and details</h2></div>
    </div>
    <div class="verified-catalog-grid">
-      <?php foreach($verified_items as $item):
+      <?php $last_group = null; foreach($verified_items as $item):
+         $group_key = strtolower(trim((string)($item['subtype'] ?? $item['system_class'] ?? '')));
+         if($group_key === '' && (($item['category'] ?? '') === 'Batteries')) $group_key = 'battery';
+         if($group_key === '' && (($item['category'] ?? '') === 'Panels')) $group_key = 'panels';
+         $group_label = ucwords(str_replace(['-','_'], ' ', $group_key !== '' ? $group_key : ($item['category'] ?? 'Equipment')));
          $item_name = (string)($item['name'] ?? $item['model'] ?? 'Solar product');
          $item_model = (string)($item['model'] ?? '');
          $item_company = (string)($item['company'] ?? '');
          $item_category = (string)($item['category'] ?? '');
          $item_image = (string)($item['image_url'] ?? $item['image'] ?? 'images/category-inverter.jpg');
          $item_key = $item_company . '|' . ($item_model !== '' ? $item_model : $item_name);
-         $item_detail_url = !empty($item['official_url']) ? $item['official_url'] : 'assistant.php?q=' . rawurlencode($item_name);
          $item_price = $item['price_pkr'] ?? null;
       ?>
+      <?php if($group_key !== $last_group): $last_group = $group_key; ?><div class="catalog-group-heading"><span>PRODUCT GROUP</span><h3><?= htmlspecialchars($group_label, ENT_QUOTES, 'UTF-8'); ?></h3></div><?php endif; ?>
       <article class="verified-catalog-card">
-         <img src="<?= htmlspecialchars($item_image, ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($item_name, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" onerror="this.onerror=null;this.src='images/category-inverter.jpg';">
+         <img src="<?= htmlspecialchars($item_image, ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($item_name, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" onerror="this.closest('.verified-catalog-card').classList.add('image-unavailable');this.remove();"><span class="image-status">Manufacturer image unavailable</span>
          <div class="catalog-meta"><?= htmlspecialchars($item_company . ' / ' . $item_category, ENT_QUOTES, 'UTF-8'); ?></div>
          <h3><?= htmlspecialchars($item_name, ENT_QUOTES, 'UTF-8'); ?></h3>
          <?php if($item_model !== '' && $item_model !== $item_name): ?><div class="product-brand">Model: <?= htmlspecialchars($item_model, ENT_QUOTES, 'UTF-8'); ?></div><?php endif; ?>
-         <p><?= htmlspecialchars((string)($item['details'] ?? 'Verified product information and official source available.'), ENT_QUOTES, 'UTF-8'); ?></p>
+         <p><?= htmlspecialchars((string)($item['details'] ?? 'Verified product information available on this site.'), ENT_QUOTES, 'UTF-8'); ?></p>
          <div class="catalog-price"><?= $item_price !== null && $item_price !== '' ? 'PKR ' . number_format((float)$item_price) : 'PKR price on request'; ?></div>
          <div class="catalog-actions">
             <a class="primary" href="solar_product.php?product=<?= rawurlencode($item_key); ?>"><i class="fas fa-circle-info"></i> Full details</a>
-            <a href="<?= htmlspecialchars($item_detail_url, ENT_QUOTES, 'UTF-8'); ?>" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i> Official source</a>
          </div>
       </article>
       <?php endforeach; ?>

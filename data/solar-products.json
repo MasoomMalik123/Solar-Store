@@ -368,6 +368,7 @@
     "company": "GoodWe",
     "type": "inverter",
     "subtype": "hybrid",
+    "system_class": "low-voltage",
     "category": "Inverters",
     "name": "GoodWe ES Uniq",
     "model": "ES Uniq 3–12 kW",
@@ -382,6 +383,7 @@
     "company": "GoodWe",
     "type": "inverter",
     "subtype": "hybrid",
+    "system_class": "low-voltage",
     "category": "Inverters",
     "name": "GoodWe ET LV",
     "model": "ET LV 5–20 kW",
@@ -395,6 +397,8 @@
   {
     "company": "GoodWe",
     "type": "battery",
+    "subtype": "high-voltage",
+    "system_class": "high-voltage",
     "category": "Batteries",
     "name": "GoodWe Lynx Home F",
     "model": "LX F6.6-H",
@@ -407,6 +411,8 @@
   {
     "company": "GoodWe",
     "type": "battery",
+    "subtype": "high-voltage",
+    "system_class": "high-voltage",
     "category": "Batteries",
     "name": "GoodWe Lynx Home F",
     "model": "LX F9.8-H",

@@ -14,16 +14,14 @@
       "isBackground": true,
       "problemMatcher": {
         "owner": "solar-store-php-server",
-        "pattern": [
-          {
-            "regexp": ".*",
-            "message": 0
-          }
-        ],
+        "pattern": {
+          "regexp": "^(.*)$",
+          "message": 1
+        },
         "background": {
           "activeOnStart": true,
-          "beginsPattern": "Development Server \\(http://127\\.0\\.0\\.1:8012\\) started",
-          "endsPattern": "Development Server \\(http://127\\.0\\.0\\.1:8012\\) started"
+          "beginsPattern": ".*Development Server \\(http://127\\.0\\.0\\.1:8012\\) started.*",
+          "endsPattern": ".*Development Server \\(http://127\\.0\\.0\\.1:8012\\) started.*"
         }
       }
     },

@@ -75,7 +75,6 @@ $local_recommendations = $product ? (strcasecmp((string)($product['category'] ??
             <a class="option-btn" href="shop.php?brand=<?= rawurlencode($product['company']); ?>&category=<?= rawurlencode($product['category'] ?? ''); ?>">See compatible catalog</a>
          </div>
          <p class="local-data-note">The information above is available on this site. Confirm the exact SKU, current PKR price, stock, warranty and installation requirements with the seller before ordering.</p>
-         <?php if(!empty($product['official_url'])): ?><a class="solar-source" href="<?= product_html($product['official_url']); ?>" target="_blank" rel="noopener">Optional: verify manufacturer source</a><?php endif; ?>
       </div>
    </article>
 <?php endif; ?>

@@ -1,4 +1,7 @@
 <?php
+ob_start(function($html){
+   return preg_replace('~<a class="btn"[^>]*>Official website <i class="fas fa-arrow-up-right-from-square"></i></a>~', '<a class="btn" href="category.php">View local catalog <i class="fas fa-arrow-right"></i></a>', $html);
+});
 include 'components/connect.php'; session_start(); $user_id=$_SESSION['user_id']??''; include 'components/wishlist_cart.php';
 $brands=json_decode(file_get_contents(__DIR__.'/data/solar-brands.json'),true)?:[];
 ?>

@@ -17,12 +17,33 @@ $solar_accessories = json_decode(file_get_contents(__DIR__ . '/data/solar-access
 $home_catalog = array_merge($verified_products, array_map(function($item){ return array_merge($item, ['company'=>'Solar Store','type'=>'accessory','model'=>$item['name'] ?? '']); }, $solar_accessories));
 $brand_priority = ['Knox','ZIEWNIC','Inverex','Luminey','Primax','itel Energy','T-Solar / Tesla Industries','SolarMax','Solis','GoodWe','Growatt','Huawei','Sungrow','SMA','Fronius','BYD'];
 usort($home_catalog, function($a,$b) use ($brand_priority){ $ai=array_search($a['company']??'', $brand_priority, true); $bi=array_search($b['company']??'', $brand_priority, true); $ai=$ai===false?999:$ai; $bi=$bi===false?999:$bi; return $ai===$bi ? strcasecmp((string)($a['name']??''),(string)($b['name']??'')) : $ai<=>$bi; });
-$home_carousels = [
-   'Inverters' => array_values(array_filter($home_catalog, fn($item)=>($item['category'] ?? '') === 'Inverters')),
-   'Batteries' => array_values(array_filter($home_catalog, fn($item)=>($item['category'] ?? '') === 'Batteries')),
-   'Panels' => array_values(array_filter($home_catalog, fn($item)=>($item['category'] ?? '') === 'Panels')),
-   'Protection, DB boxes & cables' => array_values(array_filter($home_catalog, fn($item)=>in_array(($item['category'] ?? ''), ['Protection','DB Boxes','Cables','Accessories','Monitoring'], true))),
+$home_carousel_definitions = [
+   'Hybrid inverters' => ['category'=>'Inverters', 'types'=>['hybrid'], 'link'=>'category.php?category=Inverters&type=hybrid'],
+   'On-grid inverters' => ['category'=>'Inverters', 'types'=>['on-grid'], 'link'=>'category.php?category=Inverters&type=on-grid'],
+   'Batteries' => ['category'=>'Batteries', 'types'=>['battery','low-voltage',''], 'link'=>'category.php?category=Batteries'],
+   'High-voltage storage' => ['category'=>'Batteries', 'types'=>['high-voltage'], 'link'=>'category.php?category=Batteries&type=high-voltage'],
+   'Breakers & protection' => ['categories'=>['Protection','DB Boxes','Cables','Accessories','Monitoring'], 'link'=>'category.php?category=Breakers'],
+   'Solar panels' => ['category'=>'Panels', 'link'=>'category.php?category=Panels'],
+   'Mounting' => ['category'=>'Mounting', 'link'=>'category.php?category=Mounting'],
 ];
+$home_carousels = [];
+$home_carousel_links = [];
+foreach($home_carousel_definitions as $label => $definition){
+   $home_carousels[$label] = [];
+   $home_carousel_links[$label] = $definition['link'];
+   $seen_companies = [];
+   foreach($home_catalog as $item){
+      $item_category = (string)($item['category'] ?? '');
+      $item_type = strtolower(trim((string)($item['subtype'] ?? $item['type'] ?? '')));
+      $category_match = isset($definition['categories']) ? in_array($item_category, $definition['categories'], true) : $item_category === ($definition['category'] ?? '');
+      $type_match = !isset($definition['types']) || in_array($item_type, $definition['types'], true);
+      $company = trim((string)($item['company'] ?? 'Solar Store'));
+      if($category_match && $type_match && !isset($seen_companies[$company])){
+         $home_carousels[$label][] = $item;
+         $seen_companies[$company] = true;
+      }
+   }
+}
 
 ?>
 <!-- html -->
@@ -148,7 +169,7 @@ $home_carousels = [
    <div class="section-heading"><div><p class="section-kicker">03 / COMPLETE CATALOG</p><h2 class="heading">Every system component.</h2></div><a href="assistant.php" class="section-link">Ask the assistant <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>
    <?php foreach($home_carousels as $carousel_name => $carousel_items): if(!$carousel_items) continue; ?>
    <section class="brand-carousel-section" aria-label="<?= htmlspecialchars($carousel_name, ENT_QUOTES, 'UTF-8'); ?> catalog">
-      <div class="brand-carousel-heading"><h3><?= htmlspecialchars($carousel_name, ENT_QUOTES, 'UTF-8'); ?></h3><a href="category.php?category=<?= rawurlencode(strpos($carousel_name, 'Protection') === 0 ? 'Breakers' : $carousel_name); ?>">View all <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>
+      <div class="brand-carousel-heading"><h3><?= htmlspecialchars($carousel_name, ENT_QUOTES, 'UTF-8'); ?></h3><a href="<?= htmlspecialchars($home_carousel_links[$carousel_name] ?? 'shop.php', ENT_QUOTES, 'UTF-8'); ?>">View all <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>
       <div class="brand-carousel-viewport"><div class="brand-carousel-track">
       <?php for($copy=0; $copy<2; $copy++): foreach($carousel_items as $carousel_item):
          $carousel_name_item = (string)($carousel_item['name'] ?? $carousel_item['model'] ?? 'Solar product');
@@ -159,7 +180,7 @@ $home_carousels = [
          $carousel_link = ($carousel_item['type'] ?? '') === 'accessory' ? 'assistant.php?q=' . rawurlencode($carousel_name_item) : 'solar_product.php?product=' . rawurlencode($carousel_key);
       ?>
       <a class="brand-carousel-card" href="<?= $carousel_link; ?>">
-         <img src="<?= htmlspecialchars($carousel_image, ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($carousel_company . ' ' . $carousel_name_item, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" onerror="this.onerror=null;this.src='images/category-inverter.jpg';">
+         <img src="<?= htmlspecialchars($carousel_image, ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($carousel_company . ' ' . $carousel_name_item, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" onerror="this.closest('.brand-carousel-card').classList.add('image-unavailable');this.remove();"><span class="image-status">Manufacturer image unavailable</span>
          <strong><?= htmlspecialchars($carousel_company, ENT_QUOTES, 'UTF-8'); ?></strong>
          <span><?= htmlspecialchars($carousel_name_item, ENT_QUOTES, 'UTF-8'); ?></span>
          <?php if($carousel_model !== '' && $carousel_model !== $carousel_name_item): ?><small><?= htmlspecialchars($carousel_model, ENT_QUOTES, 'UTF-8'); ?></small><?php endif; ?>
@@ -169,18 +190,7 @@ $home_carousels = [
       </div></div>
    </section>
    <?php endforeach; ?>
-   <div class="verified-catalog-grid">
-   <?php foreach(array_merge($verified_products, $solar_accessories) as $catalog_item): ?>
-      <?php $catalog_key=($catalog_item['company']??'Solar Store').'|'.($catalog_item['model']??$catalog_item['name']); $catalog_image=$catalog_item['image_url']??$catalog_item['image']??'images/category-inverter.jpg'; ?>
-      <a class="verified-card" href="<?= isset($catalog_item['model']) ? 'solar_product.php?product='.rawurlencode($catalog_key) : 'assistant.php?q='.rawurlencode($catalog_item['name']); ?>">
-         <img src="<?= htmlspecialchars($catalog_image,ENT_QUOTES,'UTF-8'); ?>" alt="<?= htmlspecialchars(($catalog_item['company']??'Solar Store').' '.$catalog_item['name'],ENT_QUOTES,'UTF-8'); ?>">
-         <div class="product-brand"><?= htmlspecialchars(($catalog_item['company']??'Solar Store').' / '.($catalog_item['category']??'Equipment'),ENT_QUOTES,'UTF-8'); ?></div>
-         <div class="name"><?= htmlspecialchars($catalog_item['name'],ENT_QUOTES,'UTF-8'); ?></div>
-         <small><?= htmlspecialchars($catalog_item['details']??'',ENT_QUOTES,'UTF-8'); ?></small>
-         <div class="price"><?= isset($catalog_item['price_pkr']) && $catalog_item['price_pkr'] ? 'PKR '.number_format($catalog_item['price_pkr']) : 'PKR price on request'; ?></div>
-      </a>
-   <?php endforeach; ?>
-   </div>
+   <div class="catalog-note"><p>Products are grouped by equipment type and brand. Open a group to browse the complete local catalog with full details.</p><a class="btn" href="shop.php">Browse complete catalog</a></div>
 </section>
 
 <section class="store-guide">

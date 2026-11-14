@@ -35,6 +35,7 @@
       $is_logged_in = isset($user_id) && $user_id !== '' && is_array($fetch_profile);
       $catalog_by_brand = [];
       $catalog_types = [];
+      $brand_aliases = ['CoreTECH Solar'=>'CoreTECH','BYD Battery-Box'=>'BYD','T-Solar / Tesla Industries'=>'Tesla Solar','KNOX'=>'Knox'];
       if(isset($conn)){
          try{
             $catalog_rows = $conn->query("SELECT DISTINCT brand, category FROM `products` WHERE brand <> '' AND category <> '' ORDER BY brand, category")->fetchAll(PDO::FETCH_ASSOC);
@@ -51,6 +52,7 @@
       $verified_catalog = is_file($verified_catalog_file) ? (json_decode(file_get_contents($verified_catalog_file), true) ?: []) : [];
       $verified_accessories = is_file($verified_accessories_file) ? (json_decode(file_get_contents($verified_accessories_file), true) ?: []) : [];
       $brand_directory = is_file($brand_directory_file) ? (json_decode(file_get_contents($brand_directory_file), true) ?: []) : [];
+      $available_product_types = ['hybrid','on-grid','off-grid','high-voltage','low-voltage','bifacial','monofacial','accessory'];
       foreach($verified_catalog as $catalog_item){
          $verified_brand = trim((string)($catalog_item['company'] ?? ''));
          $verified_category = trim((string)($catalog_item['category'] ?? ''));
@@ -58,6 +60,8 @@
          if($verified_brand !== '' && $verified_category !== ''){
             $verified_type = trim((string)($catalog_item['subtype'] ?? $catalog_item['type'] ?? ''));
             if($verified_type !== '') $catalog_types[$verified_brand][$verified_category][] = $verified_type;
+            $verified_system_class = trim((string)($catalog_item['system_class'] ?? ''));
+            if($verified_system_class !== '') $available_product_types[] = $verified_system_class;
          }
       }
       foreach($verified_accessories as $accessory_item){
@@ -70,6 +74,7 @@
       foreach($brand_directory as $directory_brand){
          $directory_name = trim((string)($directory_brand['name'] ?? ''));
          if($directory_name === '') continue;
+         $directory_name = $brand_aliases[$directory_name] ?? $directory_name;
          if(!isset($catalog_by_brand[$directory_name])) $catalog_by_brand[$directory_name] = [];
          foreach(($directory_brand['categories'] ?? []) as $directory_category){
             $directory_category = trim((string)$directory_category);
@@ -86,6 +91,8 @@
             sort($catalog_types[$type_brand][$type_category]);
          }
       }
+      $available_product_types = array_values(array_unique(array_filter(array_map('strtolower', $available_product_types))));
+      sort($available_product_types);
    ?>
 
          <a href="home.php" class="logo">
@@ -165,7 +172,7 @@
                         <label for="category-subtype-select">Product type</label>
                         <select id="category-subtype-select" name="type">
                            <option value="">All types</option>
-                           <?php foreach(['hybrid','on-grid','off-grid','high-voltage','bifacial','monofacial','accessory'] as $type_name): ?><option value="<?= $type_name; ?>"><?= ucwords(str_replace('-', ' ', $type_name)); ?></option><?php endforeach; ?>
+                           <?php foreach($available_product_types as $type_name): ?><option value="<?= htmlspecialchars($type_name, ENT_QUOTES, 'UTF-8'); ?>"><?= ucwords(str_replace('-', ' ', $type_name)); ?></option><?php endforeach; ?>
                         </select>
                         <button type="submit" class="category-submit"><span>View products</span><i class="fas fa-arrow-right" aria-hidden="true"></i></button>
                         <?php if(empty($catalog_by_brand)): ?>
@@ -184,6 +191,7 @@
                </form>
                <a href="wishlist.php" class="nav-item nav-action <?php if($current_page=='wishlist.php') echo 'active'; ?>" aria-label="Wishlist" title="Wishlist"><span class="icon-wrap"><i class="fas fa-heart"></i></span><span class="nav-label">Wishlist <b class="nav-count"><?= $total_wishlist_counts; ?></b></span></a>
                <a href="cart.php" class="nav-item nav-action <?php if($current_page=='cart.php') echo 'active'; ?>" aria-label="Cart" title="Cart"><span class="icon-wrap"><i class="fas fa-shopping-cart"></i></span><span class="nav-label">Cart <b class="nav-count"><?= $total_cart_counts; ?></b></span></a>
+               <button id="theme-toggle-nav" class="nav-item nav-theme" data-theme-toggle type="button" title="Toggle light/dark theme" aria-label="Toggle light/dark theme"><span class="icon-wrap"><i class="fas fa-sun" aria-hidden="true"></i></span><span class="sr-only">Toggle theme</span></button>
                <button id="user-btn" class="nav-item nav-account" type="button" aria-label="Open account menu" aria-controls="account-menu" aria-expanded="false" title="Account"><span class="icon-wrap"><i class="fas fa-user" aria-hidden="true"></i></span><span class="nav-label">Account</span></button>
                <?php if($is_logged_in): ?>
                   <a href="update_user.php" class="nav-item nav-auth nav-profile <?php if($current_page=='update_user.php') echo 'active'; ?>"><i class="fas fa-user-edit" aria-hidden="true"></i><span>Manage Profile</span></a>
@@ -205,13 +213,13 @@
          <a href="orders.php" class="account-menu-link <?php if($current_page=='orders.php') echo 'active'; ?>"><i class="fas fa-box" aria-hidden="true"></i> Orders</a>
          <a href="about.php" class="account-menu-link <?php if($current_page=='about.php') echo 'active'; ?>"><i class="fas fa-info-circle" aria-hidden="true"></i> About</a>
          <a href="contact_us.php" class="account-menu-link <?php if($current_page=='contact_us.php') echo 'active'; ?>"><i class="fas fa-envelope" aria-hidden="true"></i> Contact Us</a>
-         <button id="theme-toggle" class="account-menu-link theme-menu-button" type="button" title="Toggle theme" aria-label="Toggle theme"><i class="fas fa-sun" aria-hidden="true"></i><span>Change theme</span></button>
+         <button class="account-menu-link theme-menu-button" data-theme-toggle type="button" title="Toggle light/dark theme" aria-label="Toggle light/dark theme"><i class="fas fa-sun" aria-hidden="true"></i><span class="sr-only">Toggle theme</span></button>
          <a href="components/user_logout.php" class="account-menu-link logout-link" onclick="return confirm('logout from the website?');"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Log out</a>
          <?php else: ?>
          <p class="account-greeting">Welcome to Solar Store</p>
          <a href="about.php" class="account-menu-link <?php if($current_page=='about.php') echo 'active'; ?>"><i class="fas fa-info-circle" aria-hidden="true"></i> About</a>
          <a href="contact_us.php" class="account-menu-link <?php if($current_page=='contact_us.php') echo 'active'; ?>"><i class="fas fa-envelope" aria-hidden="true"></i> Contact Us</a>
-         <button id="theme-toggle" class="account-menu-link theme-menu-button" type="button" title="Toggle theme" aria-label="Toggle theme"><i class="fas fa-sun" aria-hidden="true"></i><span>Change theme</span></button>
+         <button class="account-menu-link theme-menu-button" data-theme-toggle type="button" title="Toggle light/dark theme" aria-label="Toggle light/dark theme"><i class="fas fa-sun" aria-hidden="true"></i><span class="sr-only">Toggle theme</span></button>
          <div class="account-auth-actions">
             <a href="user_register.php" class="account-auth-link"><i class="fas fa-user-plus" aria-hidden="true"></i> Register</a>
             <a href="user_login.php" class="account-auth-link login-link"><i class="fas fa-sign-in-alt" aria-hidden="true"></i> Login</a>

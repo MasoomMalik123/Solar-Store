@@ -29,7 +29,7 @@ if(categoryFilterForm){
 
    if(brandSelect && typeSelect){
       const allCategories = ['Panels', 'Inverters', 'Batteries', 'Breakers', 'Mounting', 'Protection', 'DB Boxes', 'Cables', 'Accessories', 'Monitoring'];
-      const allTypes = ['hybrid', 'on-grid', 'off-grid', 'high-voltage', 'bifacial', 'monofacial', 'accessory'];
+      const allTypes = ['hybrid', 'on-grid', 'off-grid', 'high-voltage', 'low-voltage', 'bifacial', 'monofacial', 'accessory'];
       const typeMap = window.solarCatalogTypes || {};
       const refreshTypes = () => {
          if(!subtypeSelect) return;
@@ -108,35 +108,35 @@ if(mailModal){
 }
 
 // theme toggle (persist in localStorage)
-const themeToggle = document.getElementById('theme-toggle');
+const themeToggles = Array.from(document.querySelectorAll('[data-theme-toggle]'));
 function applyTheme(t){
    if(t === 'light'){
       document.body.classList.add('light-theme');
-      if(themeToggle){
+      themeToggles.forEach(themeToggle => {
          const themeIcon = themeToggle.querySelector('i');
          if(themeIcon) themeIcon.className = 'fas fa-moon';
-         const themeLabel = themeToggle.querySelector('span');
-         if(themeLabel) themeLabel.textContent = 'Switch to dark theme';
-      }
+         themeToggle.setAttribute('aria-label', 'Switch to dark theme');
+         themeToggle.title = 'Switch to dark theme';
+      });
    }else{
       document.body.classList.remove('light-theme');
-      if(themeToggle){
+      themeToggles.forEach(themeToggle => {
          const themeIcon = themeToggle.querySelector('i');
          if(themeIcon) themeIcon.className = 'fas fa-sun';
-         const themeLabel = themeToggle.querySelector('span');
-         if(themeLabel) themeLabel.textContent = 'Switch to light theme';
-      }
+         themeToggle.setAttribute('aria-label', 'Switch to light theme');
+         themeToggle.title = 'Switch to light theme';
+      });
    }
 }
 const themeStorageKey = 'solar_store_theme';
 const savedTheme = localStorage.getItem(themeStorageKey) || 'dark';
 applyTheme(savedTheme);
-if(themeToggle){
-   themeToggle.addEventListener('click', ()=>{
+if(themeToggles.length){
+   themeToggles.forEach(themeToggle => themeToggle.addEventListener('click', ()=>{
       const next = document.body.classList.contains('light-theme') ? 'dark' : 'light';
       applyTheme(next);
       localStorage.setItem(themeStorageKey, next);
-   });
+   }));
 }
 
 document.addEventListener('click', (event)=>{

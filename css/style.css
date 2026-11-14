@@ -375,6 +375,8 @@ body.light-theme .nav-count{ background:var(--nav-color); color:#fff; }
 body.light-theme .nav-search-form{ border-color:rgba(255,255,255,.22); background:rgba(255,255,255,.1); }
 body.light-theme .nav-search-form input{ color:#fffefa; }
 body.light-theme .nav-search-form input::placeholder{ color:rgba(255,255,255,.75); }
+body.light-theme .nav-theme{ color:#fffefa; border-color:rgba(255,255,255,.24); }
+body.light-theme .nav-theme:hover{ color:#151713; }
 
 .header .flex .logo-text{
    font-size: 2.2rem;
@@ -1325,6 +1327,10 @@ body.light-theme .nav-search-form input::placeholder{ color:rgba(255,255,255,.75
 .account-menu .account-menu-link:hover,
 .account-menu .account-menu-link.active{ background:rgba(90,46,160,.08); color:var(--nav-color); }
 .account-menu .theme-menu-button{ font-family:inherit; }
+.nav-theme{ width:4rem; min-width:4rem; display:inline-flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,.24); cursor:pointer; }
+.nav-theme .icon-wrap{ width:2.4rem; height:2.4rem; display:inline-flex; align-items:center; justify-content:center; border-radius:50%; background:rgba(255,255,255,.08); }
+.nav-theme:hover{ color:#151713; background:var(--accent); border-color:var(--accent); }
+.sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 .account-auth-actions{ display:grid; grid-template-columns:1fr 1fr; gap:.7rem; margin-top:.8rem; padding-top:1rem; border-top:var(--border); }
 .account-auth-link{ display:flex; align-items:center; justify-content:center; gap:.6rem; min-height:3.8rem; padding:.7rem .8rem; color:var(--black); border:var(--border); border-radius:.2rem; font-size:1.3rem; font-weight:700; }
 .account-auth-link:hover{ background:rgba(228,90,59,.12); }
@@ -1430,6 +1436,13 @@ body.light-theme .nav-search-form input::placeholder{ color:rgba(255,255,255,.75
 .brand-carousel-card span{ margin-top:.35rem; font-size:1.55rem; font-weight:700; }
 .brand-carousel-card small{ margin-top:.35rem; color:var(--light-color); font-size:1.15rem; }
 .brand-carousel-card em{ margin-top:auto; padding-top:1rem; color:var(--main-color); font-size:1.3rem; font-style:normal; font-weight:700; }
+.image-status{ display:none; min-height:12rem; align-items:center; justify-content:center; padding:1.2rem; color:var(--light-color); background:var(--light-bg); border:1px dashed var(--main-color); font-size:1.15rem; text-align:center; }
+.image-unavailable .image-status{ display:flex; }
+.image-unavailable{ background:var(--white); }
+.catalog-group-heading{ grid-column:1/-1; display:flex; align-items:end; justify-content:space-between; gap:1rem; margin-top:1.5rem; padding:.9rem 0; border-bottom:var(--border); }
+.catalog-group-heading span{ color:var(--main-color); font-size:1.1rem; letter-spacing:.16em; font-weight:700; }
+.catalog-group-heading h3{ margin:0; font-size:2.2rem; }
+.brand-carousel-card.image-unavailable{ background:var(--white); }
 @keyframes solar-marquee{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
 @media(prefers-reduced-motion:reduce){ .brand-carousel-track{ animation:none; } }
 .products .heading{ margin-bottom:3rem; }

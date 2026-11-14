@@ -13,6 +13,8 @@ if(isset($_SESSION['user_id'])){
 include 'components/wishlist_cart.php';
 
 $brand_filter = trim($_GET['brand'] ?? '');
+$brand_aliases = ['CoreTECH Solar'=>'CoreTECH','BYD Battery-Box'=>'BYD','T-Solar / Tesla Industries'=>'Tesla Solar','KNOX'=>'Knox'];
+$brand_filter = $brand_aliases[$brand_filter] ?? $brand_filter;
 $category_filter = trim($_GET['category'] ?? '');
 $type_filter = strtolower(trim($_GET['type'] ?? ''));
 $category_aliases = ['panel'=>'Panels','panels'=>'Panels','inverter'=>'Inverters','inverters'=>'Inverters','battery'=>'Batteries','batteries'=>'Batteries','breaker'=>'Breakers','breakers'=>'Breakers','mounting'=>'Mounting'];
@@ -25,7 +27,9 @@ $verified_items = [];
 foreach($verified_catalog as $item){
    if($brand_filter !== '' && strcasecmp((string)($item['company'] ?? ''), $brand_filter) !== 0) continue;
    if($category_filter !== '' && strcasecmp((string)($item['category'] ?? ''), $category_filter) !== 0) continue;
-   if($type_filter !== '' && strcasecmp((string)($item['subtype'] ?? $item['type'] ?? ''), $type_filter) !== 0) continue;
+   $item_subtype = strtolower(trim((string)($item['subtype'] ?? $item['type'] ?? '')));
+   $item_system_class = strtolower(trim((string)($item['system_class'] ?? '')));
+   if($type_filter !== '' && $item_subtype !== $type_filter && $item_system_class !== $type_filter) continue;
    $verified_items[] = $item;
 }
 if($brand_filter === '' || strcasecmp($brand_filter, 'Solar Store') === 0){
@@ -118,19 +122,17 @@ $db_sql = 'SELECT * FROM `products` WHERE ' . implode(' AND ', $db_filters) . ' 
          $item_category = (string)($item['category'] ?? '');
          $item_image = (string)($item['image_url'] ?? $item['image'] ?? 'images/category-inverter.jpg');
          $item_key = $item_company . '|' . ($item_model !== '' ? $item_model : $item_name);
-         $item_detail_url = !empty($item['official_url']) ? $item['official_url'] : 'assistant.php?q=' . rawurlencode($item_name);
          $item_price = $item['price_pkr'] ?? null;
       ?>
       <article class="verified-catalog-card">
-         <img src="<?= htmlspecialchars($item_image, ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($item_name, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" onerror="this.onerror=null;this.src='images/category-inverter.jpg';">
+         <img src="<?= htmlspecialchars($item_image, ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($item_name, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" onerror="this.closest('.verified-catalog-card').classList.add('image-unavailable');this.remove();"><span class="image-status">Manufacturer image unavailable</span>
          <div class="catalog-meta"><?= htmlspecialchars($item_company . ' / ' . $item_category, ENT_QUOTES, 'UTF-8'); ?></div>
          <h3><?= htmlspecialchars($item_name, ENT_QUOTES, 'UTF-8'); ?></h3>
          <?php if($item_model !== '' && $item_model !== $item_name): ?><div class="product-brand">Model: <?= htmlspecialchars($item_model, ENT_QUOTES, 'UTF-8'); ?></div><?php endif; ?>
-         <p><?= htmlspecialchars((string)($item['details'] ?? 'Verified product information and official source available.'), ENT_QUOTES, 'UTF-8'); ?></p>
+         <p><?= htmlspecialchars((string)($item['details'] ?? 'Verified product information available on this site.'), ENT_QUOTES, 'UTF-8'); ?></p>
          <div class="catalog-price"><?= $item_price !== null && $item_price !== '' ? 'PKR ' . number_format((float)$item_price) : 'PKR price on request'; ?></div>
          <div class="catalog-actions">
             <a class="primary" href="solar_product.php?product=<?= rawurlencode($item_key); ?>"><i class="fas fa-circle-info"></i> Full details</a>
-            <a href="<?= htmlspecialchars($item_detail_url, ENT_QUOTES, 'UTF-8'); ?>" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i> Official source</a>
          </div>
       </article>
       <?php endforeach; ?>
